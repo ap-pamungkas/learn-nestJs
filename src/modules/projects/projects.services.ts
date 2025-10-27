@@ -25,8 +25,8 @@ export class ProjectsService {
   ): Promise<Project> {
     const updatedProject = await this.projectModel
       .findByIdAndUpdate(id, updateProjectDto, { new: true })
-      // ⬅️ PENYEBAB UTAMA ERROR: Anda mungkin lupa ini
-      .exec(); // <--- TAMBAHKAN ATAU PASTIKAN .exec() ADA DI SINI
+
+      .exec();
 
     if (!updatedProject) {
       throw new NotFoundException(
@@ -36,7 +36,6 @@ export class ProjectsService {
 
     return updatedProject;
   }
-
 
   async findAll(): Promise<Project[]> {
     return this.projectModel.find().exec();
@@ -54,7 +53,7 @@ export class ProjectsService {
   }
 
   // 5. DELETE: Menghapus Proyek
-  async remove(id: string): Promise<any> {
+  async remove(id: string): Promise<{ message: string; deletedCount: number }> {
     const result = await this.projectModel.findByIdAndDelete(id).exec();
 
     // Penanganan Error

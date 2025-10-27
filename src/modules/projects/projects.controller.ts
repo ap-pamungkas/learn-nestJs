@@ -7,13 +7,13 @@ import {
   HttpStatus,
   Put,
   Param,
-  Delete
+  Delete,
 } from '@nestjs/common';
 import { ProjectsService } from './projects.services';
 import { CreateProjectDto } from './dto/create-project.dto'; // Import DTO
 import { UpdateProjectDto } from './dto/update-project.dto';
 
-@Controller('api/projects')
+@Controller('projects')
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
@@ -38,15 +38,13 @@ export class ProjectsController {
     return this.projectsService.update(id, updateProjectDto);
   }
 
-
   @Get(':id')
   async getProjectById(@Param('id') id: string) {
     return this.projectsService.findOne(id);
   }
 
-
   @Delete(':id')
-  @HttpCode(HttpStatus.OK) 
+  @HttpCode(HttpStatus.OK)
   async deleteProject(@Param('id') id: string) {
     return this.projectsService.remove(id);
   }
