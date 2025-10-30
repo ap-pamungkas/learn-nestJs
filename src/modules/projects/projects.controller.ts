@@ -9,7 +9,7 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { ProjectsService } from './projects.services';
+import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto'; // Import DTO
 import { UpdateProjectDto } from './dto/update-project.dto';
 
